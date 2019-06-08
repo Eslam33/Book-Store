@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  #get 'auther/show'
+  
+  get '/category/:categoryid', to: 'category#show' , as: 'category'
   
   get '/auther/:authername', to: 'auther#show' , as: 'auther'
   

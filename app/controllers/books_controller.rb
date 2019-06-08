@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @categories = Category.all
   end
 
   # GET /books/1
@@ -15,6 +16,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = current_user.books.build #Book.new
+    @categories = Category.all.map{ |c| [c.name , c.id]}
   end
 
   # GET /books/1/edit
@@ -22,18 +24,20 @@ class BooksController < ApplicationController
     if !authenticated_current_user
       redirect_to root_path
     end
+    @categories = Category.all.map{ |c| [c.name , c.id]}
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = current_user.books.build(book_params) #Book.new(book_params)
-
+    @book.category_id = params[:category_id]
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
+        @categories = Category.all.map{ |c|  [c.name, c.id] }
         format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
@@ -44,10 +48,12 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   def update
     respond_to do |format|
+      @book.category_id = params[:category_id]
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
+       @categories = Category.all.map{ |c| [c.name , c.id]}   
         format.html { render :edit }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
@@ -72,7 +78,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :description, :authername)
+      params.require(:book).permit(:title, :description, :authername , :category_id)
     end
 
     def authenticated_current_user

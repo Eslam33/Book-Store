@@ -1,0 +1,10 @@
+<h1>Category: <%= @category.name %></h1>
+
+
+Books: <% @books.each do |book| %>
+<h4>
+Title: <%= book.title %> <br />
+Description: <%= book.description %>
+</h4>
+<hr />
+<% end %>
