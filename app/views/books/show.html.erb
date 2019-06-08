@@ -12,7 +12,8 @@
 
 <p>
   <strong>Authername:</strong>
-  <%= @book.authername %>
+  
+  <%= link_to @book.authername , auther_path(@book.authername) %>
 </p>
 
  
