@@ -8,4 +8,8 @@ class Book < ApplicationRecord
 
 	validates :authername ,presence: true , length: {minimum:2 }
    
+   	validates :image ,presence: true 
+   
+
+   	has_one_attached :image
 end

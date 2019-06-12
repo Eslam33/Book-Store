@@ -52,14 +52,7 @@ h3{
 p.alert, p.notice {
 	margin: 0;
 }
-.category_icon{
-  border-radius: 15px 50px 30px;
-  background: #ef6712;
-  padding: 20px; 
-  width: 200px;
-  height: 150px;
 
-}
 
 /* Navbar/navigation styles */
 
@@ -159,9 +152,22 @@ p.alert, p.notice {
 }
 
 /* Book styles */
-.category{
+.category_icon{
+  border-radius: 15px 50px 30px;
+  background: #ef6712;
+  padding: 20px; 
+  width: 100px;
+  height: 50px;
+}
+.category-tile{
+	padding: 20px;
 	margin: 10px;
 
+}
+.category{
+	display: grid;
+	grid-template-columns: 120px 120px 120px 120px 120px;
+	align-content: center;
 }
 .book {
 	height: 100px;
@@ -176,8 +182,9 @@ p.alert, p.notice {
 	align-content: center;
 }
 .book-show {
-	height: 425px;
-	width: 275px;
+	margin-bottom:20px;
+	height: 325px;
+	width: 225px;
 	@include background-tile;
 }
 

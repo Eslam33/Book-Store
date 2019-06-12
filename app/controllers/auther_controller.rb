@@ -1,8 +1,9 @@
 class AutherController < ApplicationController
   def show
-	if Book.find_by(authername: params[:authername])
-		@auther = params[:authername]
-		@books = Book.where(authername:  @auther)
+  	@auther_name = CGI::unescape(params[:authername])
+	
+  	if Book.find_by(authername: @auther_name)
+		@books = Book.where(authername:  @auther_name)
 	else
 		redirect_to '/404'
 	end

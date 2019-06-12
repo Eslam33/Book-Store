@@ -74,11 +74,12 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      @category = Category.find(@book.category_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :description, :authername , :category_id)
+      params.require(:book).permit(:title, :description, :authername , :category_id , :image)
     end
 
     def authenticated_current_user
